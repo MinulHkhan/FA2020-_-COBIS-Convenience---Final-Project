@@ -1,0 +1,118 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Store {
+
+    public static <Store> void main(String[] args) {
+
+        ArrayList<Store> inventory = new ArrayList <Store>();
+
+        Store str = new Store("Red-Hot Spicy Doritos",2.99);
+        inventory.add(str);
+
+        Store  = new Store("Cool Ranch Doritos",2.99);
+        inventory.add(str);
+
+        str = new Store("Coke",0.99);
+        inventory.add(str);
+
+        str = new Store("Diet Coke", 0.99);
+        inventory.add(str);
+
+        str = new Store("Pepsi",0.99);
+        inventory.add(str);
+
+        str = new Store("Five Hour Energy",3.99);
+        inventory.add(str);
+
+        str = new Store("Sunflower Seeds",0.99);
+        inventory.add(str);
+
+        str = new Store("Peanuts",0.99);
+        inventory.add(str);
+
+        str = new Store("Mac Chargers",120);
+        inventory.add(str);
+
+        str = new Store("Dell Chargers",50);
+        inventory.add(str);
+
+        System.out.println("Welcome to the Store!");
+
+        for (int i = 0; i < inventory.size(); i++) {
+            System.out.println(inventory.get(i).get_Products() +
+                    "  :  " + inventory.get(i).get_Prices());
+        }
+        System.out.println();
+        
+        // Starting order
+
+        Scanner input = new Scanner(System.in);
+        Orders order = new Orders();
+        Customer customer = new Customer();
+        Inventory inventory1 = new Inventory();
+        String action = "";
+        String build = "";
+
+
+        do {
+            System.out.println("What do you want to buy today " +
+                    "\n To Add Customer, " +
+                    "type \"1\". To Close," +
+                    " type \"Close\");
+            action = input.nextLine();
+
+            // Inserting customer
+
+            if (action.equals("1")){
+                System.out.print("Customer name: ");
+                String cus = input.nextLine();
+                customer = new Customer();
+                customer.setName(cus);
+
+                // Customer Items
+
+                String item = " ";
+                do {
+                    System.out.println("What do you want to buy? If done, type \"Done\"");
+                    item = input.nextLine();
+                    int index = -1;
+                    for (int i = 0; i < inventory.size(); i++) {
+                        if (inventory.get(i).getProducts().equals(item)) {
+                            index = i;
+                        }
+                    }
+                    if (index == - 1) {
+                        System.out.println();
+                    }
+
+                    else {
+                        String purProd = inventory.get(index).getProducts();
+                        Double purPrice = inventory.get(index).getPrices();
+                        order = new Orders();
+                        order.setOrderedName(purProd);
+                        order.setOrderedPrice(purPrice);
+                        customer.addItem(order);
+                        inventory1.addOrder(order);
+                        System.out.println("Cost: " + order.getOrderedPrice());
+                    }
+                }
+                
+                while (! item.equals("Done"));
+                build += customer.toString();
+            }
+            else {
+                System.out.println();
+            }
+        }
+        while (! action.equals("Close"));
+        System.out.println("Closing");
+        System.out.println("RECEIPTS");
+        System.out.println(build);
+        System.out.print("INVENTORY SOLD");
+        System.out.println(inventory1.toString());
+    }
+
+}
