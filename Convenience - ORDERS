@@ -1,0 +1,34 @@
+package com.company;
+
+class Orders {
+    private String ordered_Name;
+    private double ordered_Price;
+
+    public Orders(String orderedName, double orderedPrice) {
+        this.ordered_Name = orderedName;
+        this.ordered_Price = orderedPrice;
+    }
+
+    public Orders() {
+    }
+
+    public String getOrderedName() {
+        return ordered_Name;
+    }
+
+    public void setOrderedName(String orderedName) {
+        this.ordered_Name = orderedName;
+    }
+
+    public double getOrderedPrice() {
+        return ordered_Price;
+    }
+
+    public void setOrderedPrice(double orderedPrice) {
+        this.ordered_Price = orderedPrice;
+    }
+
+    public  String toString(){
+        return ordered_Name + " : " + ordered_Price;
+    }
+}
